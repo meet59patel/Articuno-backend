@@ -1,0 +1,8 @@
+node_modules
+.env
+.env.production
+.credentials
+output.txt
+.DS_Store
+ngrok
+logs

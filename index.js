@@ -40,6 +40,28 @@ app.get('/', (req, res) => {
   });
 });
 
+app.post('/addQuiz', (req, res) => {
+  console.log(req.body);
+  //add this data to DB
+
+  //return a quiz code and submission code (also save to DB)
+  res.send(`${Math.floor(Math.random() * 1000000000)}`);
+});
+
+app.post('/giveQuiz', (req, res) => {
+  console.log(req.body.quizPreview);
+
+  //fetch questions from DB acc to quiz code
+  res.send('QUIZ Questions');
+});
+
+app.post('/submission', (req, res) => {
+  console.log(req.body.submissionCode);
+
+  //fetch submissions from DB acc to quiz code
+  res.send('QUIZ submissions');
+});
+
 // If request is able pass till here, route was not found. => Send 404 error
 app.use((req, res, next) => {
   const error = new Error('Not Found');

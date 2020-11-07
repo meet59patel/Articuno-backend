@@ -36,6 +36,8 @@ const server = http.createServer(app);
 
 // Import Routes
 const quizRoutes = require('./Routes/quiz');
+const submissionRoutes = require('./Routes/submit');
+const resultRoutes = require('./Routes/result');
 
 app.get('/', (req, res) => {
   res.status(200).json({
@@ -43,21 +45,9 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use('/addQuiz', quizRoutes);
-
-app.post('/giveQuiz', (req, res) => {
-  console.log(req.body.quizPreview);
-
-  //fetch questions from DB acc to quiz code
-  res.send('QUIZ Questions');
-});
-
-app.post('/submission', (req, res) => {
-  console.log(req.body.submissionCode);
-
-  //fetch submissions from DB acc to quiz code
-  res.send('QUIZ submissions');
-});
+app.use('/addQuiz', quizRoutes); // addQuiz, getQuiz
+app.use('/submission', submissionRoutes); // [POST]submitQuizAns
+app.use('/results', resultRoutes); // [GET] getResults, [GET] getSubmission
 
 // If request is able pass till here, route was not found. => Send 404 error
 app.use((req, res, next) => {

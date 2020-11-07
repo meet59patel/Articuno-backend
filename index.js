@@ -34,19 +34,16 @@ app.use(cors()); // Enable All CORS Requests
 
 const server = http.createServer(app);
 
+// Import Routes
+const quizRoutes = require('./Routes/quiz');
+
 app.get('/', (req, res) => {
   res.status(200).json({
     message: 'Articuno server | 200 OK | @meet59patel',
   });
 });
 
-app.post('/addQuiz', (req, res) => {
-  console.log(req.body);
-  //add this data to DB
-
-  //return a quiz code and submission code (also save to DB)
-  res.send(`${Math.floor(Math.random() * 1000000000)}`);
-});
+app.use('/addQuiz', quizRoutes);
 
 app.post('/giveQuiz', (req, res) => {
   console.log(req.body.quizPreview);

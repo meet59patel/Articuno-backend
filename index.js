@@ -37,7 +37,7 @@ const server = http.createServer(app);
 // Import Routes
 const quizRoutes = require('./Routes/quiz');
 const submissionRoutes = require('./Routes/submit');
-const resultRoutes = require('./Routes/result');
+const resultRoutes = require('./Routes/results');
 
 app.get('/', (req, res) => {
   res.status(200).json({

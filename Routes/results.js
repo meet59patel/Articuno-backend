@@ -6,8 +6,9 @@ const mongoose = require('mongoose');
 const SubmissionModel = require('../Models/Submission');
 
 //[GET] getResults (quiz-code results -- this is for all students)
-router.get('/allStudents', (req, res) => {
-  SubmissionModel.find({ QuizCode: req.body['QuizCode'] })
+router.get('/allStudents/:quizCode', (req, res) => {
+  console.log(`Finding students with QCode: ${req.params['quizCode']}`);
+  SubmissionModel.find({ QuizCode: req.params['quizCode'] })
     .select('StudentName TotalScore')
     .sort('-TotalScore')
     .then((result) => {

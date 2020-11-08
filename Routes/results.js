@@ -6,10 +6,12 @@ const mongoose = require('mongoose');
 const SubmissionModel = require('../Models/Submission');
 
 //[GET] getResults (quiz-code results -- this is for all students)
-router.get('/allStudents/:quizCode', (req, res) => {
-  console.log(`Finding students with QCode: ${req.params['quizCode']}`);
-  SubmissionModel.find({ QuizCode: req.params['quizCode'] })
-    .select('StudentName TotalScore')
+router.get('/allStudents/:SubmissionCode', (req, res) => {
+  console.log(
+    `Finding students with Submission code: ${req.params['SubmissionCode']}`
+  );
+  SubmissionModel.find({ ViewSubmissionCode: req.params['SubmissionCode'] })
+    .select('StudentName TotalScore answers')
     .sort('-TotalScore')
     .then((result) => {
       res.status(200).json(result);

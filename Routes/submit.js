@@ -56,16 +56,22 @@ router.post('/', (req, res) => {
                 console.log('***Scores are: ***', score);
                 ans['CalculatedScore'] = score;
                 console.log('logagain: ', ans);
-                console.log(studAnsList);
-                return studAnsList;
+                // console.log(studAnsList);
+                // return studAnsList;
+                return score;
               })
-              .then((studAnsList) => {
+              .then((score) => {
                 // update calculated score here
                 let submissionMongoID = savedSubmission['_id'];
                 console.log('Saving to _id: ', submissionMongoID);
                 SubmissionModel.findOneAndUpdate(
                   { _id: submissionMongoID },
-                  { answers: studAnsList },
+                  {
+                    answers: studAnsList,
+                    $inc: {
+                      TotalScore: score,
+                    },
+                  },
                   { useFindAndModify: false, upsert: true, new: true }
                 )
                   .exec()

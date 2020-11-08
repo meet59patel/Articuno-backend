@@ -11,7 +11,6 @@ router.get('/allStudents/:SubmissionCode', (req, res) => {
     `Finding students with Submission code: ${req.params['SubmissionCode']}`
   );
   SubmissionModel.find({ ViewSubmissionCode: req.params['SubmissionCode'] })
-    .select('StudentName TotalScore answers')
     .sort('-TotalScore')
     .then((result) => {
       res.status(200).json(result);
